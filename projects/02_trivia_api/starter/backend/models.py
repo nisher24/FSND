@@ -5,7 +5,6 @@ import json
 
 database_name = "trivia"
 database_path = "postgres://{}/{}".format('localhost:5432', database_name)
-
 db = SQLAlchemy()
 
 '''
@@ -70,6 +69,10 @@ class Category(db.Model):
 
   def __init__(self, type):
     self.type = type
+  
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
 
   def format(self):
     return {
