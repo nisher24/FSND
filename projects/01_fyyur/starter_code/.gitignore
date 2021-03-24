@@ -1,7 +1,9 @@
 .vscode
 __pycache__
 venv
-FlaskRecap/env/
+env/
+node_modules/
+migrations/
 
 # OS generated files #
 ######################

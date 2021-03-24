@@ -6,6 +6,16 @@
 		<h1 class="monospace">
 			{{ artist.name }}
 		</h1>
+		<div class="monospace">
+			<a id="edit_artist" class="btn btn-lg" href="{{ url_for("edit_artist", artist_id=artist.id) }}">
+                <i class="fas fa-pen"></i>
+				edit profile
+			</a>
+            <a id="delete_artist" class="btn btn-lg" data-id="{{ artist.id }}">
+                <i class="fas fa-trash"></i>
+				delete
+			</a>
+		</div>
 		<p class="subtitle">
 			ID: {{ artist.id }}
 		</p>
@@ -74,3 +84,21 @@
 
 {% endblock %}
 
+{% block script %}
+    <script>
+		const deleteBtn = document.querySelector("#delete_artist");
+
+		deleteBtn.onclick = function(event) {
+			console.log("event", event);
+			const artistID = event.target.dataset['id'];
+			console.log(artistID);
+
+			fetch("/artists/" + artistID, {
+				method: "DELETE"
+			})
+			.then(function() {
+				window.location.href = "/";
+			})
+		}
+    </script>
+{% endblock %}

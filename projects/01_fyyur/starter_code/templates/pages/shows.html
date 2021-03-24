@@ -4,6 +4,7 @@
 <div class="row shows">
     {%for show in shows %}
     <div class="col-sm-4">
+        <button class="delete-buttons close" data-id="{{ show.id }}" aria-label="Delete">&times;</button>
         <div class="tile tile-show">
             <img src="{{ show.artist_image_link }}" alt="Artist Image" />
             <h4>{{ show.start_time|datetime('full') }}</h4>
@@ -14,4 +15,29 @@
     </div>
     {% endfor %}
 </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+		// Show Delete functionality
+        const deleteBtns = document.querySelectorAll(".delete-buttons");
+
+        for (let i = 0; i < deleteBtns.length; i++) {
+            const btn = deleteBtns[i];
+
+            btn.onclick = function(event) {
+                // console.log("event", event);
+                const showID = event.target.dataset['id'];
+                // console.log("show_id", showID)
+
+                fetch("/shows/" + showID, { 
+                    method: "DELETE" 
+                })
+                .then(function() {
+				    window.location.reload();
+			    })
+            }
+        }
+
+    </script>
 {% endblock %}

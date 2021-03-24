@@ -2,6 +2,7 @@
 {% block title %}Fyyur | Venues Search{% endblock %}
 {% block content %}
 <h3>Number of search results for "{{ search_term }}": {{ results.count }}</h3>
+<h4>Search by name, city or (city, state) pair</h4>
 <ul class="items">
 	{% for venue in results.data %}
 	<li>
